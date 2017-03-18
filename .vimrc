@@ -58,18 +58,12 @@ vnoremap // "1y/<C-R>1<CR>
 
 inoremap ;w <Esc>:w
 
-" Code folding
-set foldenable
-set foldlevelstart=10
-set foldmethod=indent
-nnoremap <space> za
-
 set showcmd
 
 " set cpoptions+=$
 
 " Set colors--Makes vimdiff easier
-colorscheme desert
+" colorscheme desert
 highlight! link DiffText Todo
 
 let g:closetag_html_style=1
