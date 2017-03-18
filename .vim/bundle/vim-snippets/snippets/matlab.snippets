@@ -1,0 +1,38 @@
+snippet if
+	if ${1:truth}
+	${0}
+	end
+
+snippet func
+	function ${1:result} ${2:=} `expand('%:r')`(${3:params}${4:, varargin})
+		${0}
+	end
+
+snippet proc
+	function ${1:method_name}(${2:params})
+		${3}
+	end
+
+snippet test
+	function test_${1:method_name}()
+		${2}
+	end
+
+snippet ae
+	assertEquals(${1:a}, ${2:b});${3}
+
+snippet as
+	assert(${1:cond}, ${2:message);${3}
+
+snippet forilen
+	for i=1:length(${1:var})
+		${2:body}
+	end
+
+snippet for
+	for ${1:condition}=${2:0}:${3:end}
+		${0}
+	end
+
+snippet len
+	length(${expr})

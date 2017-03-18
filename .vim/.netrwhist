@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/zingbretsen/Downloads/mbmf_demographics_r1/debrief2'
+let g:netrw_dirhist_2='/Users/zingbretsen/Downloads/mbmf_demographics_r1/demographics'
+let g:netrw_dirhist_3='/Users/zingbretsen'
+let g:netrw_dirhist_4='/Users/zingbretsen/Dropbox'
+let g:netrw_dirhist_5='/Users/zingbretsen/Dropbox/.vim'
+let g:netrw_dirhist_6='/Users/zingbretsen/Dropbox'

@@ -1,0 +1,110 @@
+# Shebang. Executing bash via /usr/bin/env makes scripts more portable.
+snippet #!
+	#!/usr/bin/env bash
+
+snippet #SB
+	#SBATCH -n 1                                    #  Number of cores
+	#SBATCH -N 1                                    #  Ensure that all cores are on one machine
+	#SBATCH -t 0-${1:02}:00                              #  Runtime in D-HH:MM
+	#SBATCH -p ncf                                  #  Partition to submit to
+	#SBATCH --mem=${2:1000}                               #  Memory pool for all cores (see also --mem-per-cpu)
+	#SBATCH -o log/${3:output}%a.out                          #  File to which STDOUT will be written
+	#SBATCH -e log/$3%a.err                          #  File to which STDERR will be written
+	#SBATCH --mail-type=ALL                         #  Type of email notification- BEGIN,END,FAIL,ALL
+	#SBATCH --mail-user=zingbretsen@fas.harvard.edu #  Email to which notifications will be sent
+
+	i=${SLURM_ARRAY_TASK_ID}
+
+snippet matlab
+	matlab -nodisplay -r "\
+	${0}
+	exit;"
+
+snippet if
+	if [[ ${1:condition} ]]; then
+		${0:#statements}
+	fi
+snippet elif
+	elif [[ ${1:condition} ]]; then
+		${0:#statements}
+snippet for
+	for (( ${2:i} = 0; $2 < ${1:count}; $2++ )); do
+		${0:#statements}
+	done
+snippet fori
+	for ${1:needle} in ${2:haystack} ; do
+		${0:#statements}
+	done
+snippet wh
+	while [[ ${1:condition} ]]; do
+		${0:#statements}
+	done
+snippet until
+	until [[ ${1:condition} ]]; do
+		${0:#statements}
+	done
+snippet case
+	case ${1:word} in
+		${2:pattern})
+			${0};;
+	esac
+snippet go
+	while getopts '${1:o}' ${2:opts}
+	do
+		case $$2 in
+		${3:o0})
+			${0:#staments};;
+		esac
+	done
+# Set SCRIPT_DIR variable to directory script is located.
+snippet sdir
+	SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# getopt
+snippet getopt
+	__ScriptVersion="${1:version}"
+
+	#===  FUNCTION  ================================================================
+	#         NAME:  usage
+	#  DESCRIPTION:  Display usage information.
+	#===============================================================================
+	function usage ()
+	{
+			cat <<- EOT
+
+	  Usage :  $${0:0} [options] [--]
+
+	  Options:
+	  -h|help       Display this message
+	  -v|version    Display script version
+
+			EOT
+	}    # ----------  end of function usage  ----------
+
+	#-----------------------------------------------------------------------
+	#  Handle command line arguments
+	#-----------------------------------------------------------------------
+
+	while getopts ":hv" opt
+	do
+	  case $opt in
+
+		h|help     )  usage; exit 0   ;;
+
+		v|version  )  echo "$${0:0} -- Version $__ScriptVersion"; exit 0   ;;
+
+		\? )  echo -e "\n  Option does not exist : $OPTARG\n"
+			  usage; exit 1   ;;
+
+	  esac    # --- end of case ---
+	done
+	shift $(($OPTIND-1))
+snippet root
+	if [ \$(id -u) -ne 0 ]; then exec sudo \$0; fi
+snippet fun
+	${1:function_name}() {
+		${0:#function_body}
+	}
+snippet ffun
+	function ${1:function_name}() {
+		${0:#function_body}
+	}
