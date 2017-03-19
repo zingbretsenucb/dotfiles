@@ -195,6 +195,7 @@
 ;; (require-package 'evil-cleverparens)
 (require-package 'evil-numbers)
 
+(require-package 'hydra)
 (defhydra hydra-increment (global-map "C-a")
   "increment/decrement number"
   ("k" evil-numbers/inc-at-pt  "up")
